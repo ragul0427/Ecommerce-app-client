@@ -18,7 +18,7 @@ function Login() {
   const [data, setData] = useState("");
   const value = useSelector((state) => state.user.user);
   
-
+console.log(Cookies.get("token"),value,"iuyhgf")
  
   const signInWithGoogle = async () => {
     try {
