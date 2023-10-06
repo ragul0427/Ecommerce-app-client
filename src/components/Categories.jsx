@@ -13,18 +13,15 @@ import {useNavigate} from "react-router-dom"
 
 function Categories() {
   const value=useSelector((state)=>state.user.user)
-  const navigate=useNavigate()
-
- 
  
   return (
     <div>
       {CategoriesList.map((res, i) => {
         return (
           <div className="h-[45vh] w-screen flex items-center mt-2 bg-white" key={res.id}>
-            <div className="h-[100%] w-[20vw] px-10 flex flex-col gap-5 items-center justify-center">
-              <p className="text-3xl text-center">{res.catName}</p>
-              <button className="bg-[#2874F0] px-6 text-white font-semibold py-2 rounded-md">
+            <div className="h-[100%] w-[40vw] lg:w-[20vw] px-10 flex flex-col gap-5 items-center justify-center">
+              <p className="lg:text-3xl text-center">{res.catName}</p>
+              <button className="bg-[#2874F0] text-sm w-[22vw] lg:w-[8vw] h-[5vh]  text-white font-semibold  rounded-md">
                 View All
               </button>
             </div>
@@ -63,7 +60,7 @@ function Categories() {
                
                 return (
                   <SwiperSlide className="!w-[25%]  !flex !flex-col items-center justify-center">
-                    <img src={`${data.image}`} className="!w-[15vw]" />
+                    <img src={`${data.image}`} className="w-[30vw] lg:!w-[15vw]" />
                     <span>{data.name}</span>
                     <span>From {data.price}</span>
                   </SwiperSlide>

@@ -46,7 +46,7 @@ function Navbar() {
           </Form>
         </div>
         <div className="hidden md:block cursor-pointer"><ShoppingCartIcon/>Cart</div>
-        <div>Login</div>
+        <div onClick={()=>{navigate("/login")}} className="cursor-pointer">Login</div>
       </div>
     </div>
   );

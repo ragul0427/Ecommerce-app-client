@@ -51,7 +51,7 @@ export default function Swipper() {
               <div>
                 <Image
                   src={`${res.image}`}
-                  className="!h-[30vh] lg:!h-[40vh] !w-[100vw]"
+                  className="!h-[20vh] md:h-[25vh] lg:!h-[40vh] !w-[100vw]"
                   preview={false}
                 />
               </div>
