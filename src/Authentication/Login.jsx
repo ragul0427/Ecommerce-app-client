@@ -18,7 +18,6 @@ function Login() {
   const [data, setData] = useState("");
   const value = useSelector((state) => state.user.user);
   
-console.log(Cookies.get("token"),value,"iuyhgf")
  
   const signInWithGoogle = async () => {
     try {
@@ -39,7 +38,6 @@ console.log(Cookies.get("token"),value,"iuyhgf")
   };
 
   const handleFinish = async (values) => {
-    console.log(values);
     try {
       const result = await axios.post(
         `${process.env.REACT_APP_URL}/getuser`,

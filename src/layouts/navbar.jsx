@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { Avatar, Form, Input } from "antd";
+import { Avatar, Drawer, Form, Input } from "antd";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cookie from "js-cookie"
@@ -46,7 +46,7 @@ function Navbar() {
           </Form>
         </div>
         <div className="hidden md:block cursor-pointer"><ShoppingCartIcon/>Cart</div>
-        <div onClick={logOut}><AccountCircleIcon className="!text-[26px] cursor-pointer"/></div>
+        <div>Login</div>
       </div>
     </div>
   );

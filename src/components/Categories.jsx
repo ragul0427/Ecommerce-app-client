@@ -14,12 +14,7 @@ import {useNavigate} from "react-router-dom"
 function Categories() {
   const value=useSelector((state)=>state.user.user)
   const navigate=useNavigate()
-console.log(value,"Erher")
-  useEffect(()=>{
-    if(value===undefined){
-      navigate("/login")
-    }
-  },[value,navigate])
+
  
  
   return (
