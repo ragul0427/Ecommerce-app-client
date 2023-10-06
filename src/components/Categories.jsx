@@ -18,9 +18,9 @@ function Categories() {
     <div>
       {CategoriesList.map((res, i) => {
         return (
-          <div className="h-[45vh] w-screen flex items-center mt-2 bg-white" key={res.id}>
+          <div className="h-[30vh] lg:h-[45vh] w-screen flex items-center mt-2 bg-white" key={res.id}>
             <div className="h-[100%] w-[40vw] lg:w-[20vw] px-10 flex flex-col gap-5 items-center justify-center">
-              <p className="lg:text-3xl text-center">{res.catName}</p>
+              <p className="text-sm font-semibold lg:text-3xl text-center">{res.catName}</p>
               <button className="bg-[#2874F0] text-sm w-[22vw] lg:w-[8vw] h-[5vh]  text-white font-semibold  rounded-md">
                 View All
               </button>
