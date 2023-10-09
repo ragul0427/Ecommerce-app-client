@@ -30,8 +30,9 @@ function Login() {
           result.user,
           { withCredentials: true }
         );
+        fetchData()
       }
-      fetchData()
+      
     } catch (err) {
       console.log(err);
     }
