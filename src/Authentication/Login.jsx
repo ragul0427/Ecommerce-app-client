@@ -3,39 +3,38 @@ import React, { useEffect, useState } from "react";
 import { auth, googleProvider } from "../firebase/firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import google from "../../src/assets/google.png";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUservalues } from "../Redux/userSlice";
 import { isEmpty } from "lodash";
-import Cookies from "js-cookie"
+import Cookies from "js-cookie";
 
 function Login() {
   const navigate = useNavigate();
-  const location=useLocation()
+  const location = useLocation();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [data, setData] = useState("");
   const value = useSelector((state) => state.user.user);
-  
- 
+
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result)  
+      console.log(result);
       if (!isEmpty(result)) {
-        console.log(result)  
-        const response=await axios.post(
+        console.log(result);
+        const response = await axios.post(
           `${process.env.REACT_APP_URL}/getuser`,
           result.user,
           { withCredentials: true }
         );
-        const {token}=response.data;
-        console.log(token,"lll")
+        const { token } = response.data;
+        console.log(token, "lll");
         localStorage.setItem("token", token);
-       
+
+        fetchData();
       }
-      
     } catch (err) {
       console.log(err);
     }
@@ -50,41 +49,45 @@ function Login() {
           withCredentials: true,
         }
       );
-     
-      const {token}=response.data;
-      console.log(token,"lll")
+
+      const { token } = response.data;
+      console.log(token, "lll");
 
       localStorage.setItem("token", token);
+
+      fetchData();
     } catch (err) {
       console.log(err);
     }
   };
 
- 
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
 
-  // const fetchData = async () => {
-  //   try {
-  //     const result = await axios.get(`${process.env.REACT_APP_URL}/validateToken`, {
-  //       withCredentials: true,
-  //     });
-      
-  //     setData(result.data)
-     
-  //     if (!isEmpty(result.data)) {
-  //       navigate("/");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+    await axios
+      .get(`${process.env.REACT_APP_URL}/validateToken`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+
+        if (!isEmpty(response.data)) {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
-     dispatch(changeUservalues(data));
+    dispatch(changeUservalues(data));
     if (!isEmpty(data)) {
       navigate("/");
     }
-  }, [data,navigate]);
-
+  }, [data, navigate]);
 
   return (
     <div
