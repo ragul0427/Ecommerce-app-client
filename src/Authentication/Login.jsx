@@ -58,9 +58,10 @@ function Login() {
 
   const fetchData = async () => {
     try {
-      const result = await axios.get(`${process.env.REACT_APP_URL}/me`, {
+      const result = await axios.get(`${process.env.REACT_APP_URL}/validateToken`, {
         withCredentials: true,
       });
+      
       setData(result.data)
      
       if (!isEmpty(result.data)) {
