@@ -24,12 +24,15 @@ function Register() {
       const result = await signInWithPopup(auth, googleProvider);
       if (isEmpty(result)) {  
         console.log(result)
-        await axios.post(
+        const response=await axios.post(
           `${process.env.REACT_APP_URL}/createuser`,
           result.user,
           { withCredentials: true }
         );
+        const { token } = response.data;
+        localStorage.setItem("token", token);
       }
+     
 
       fetchData()
     
@@ -49,9 +52,11 @@ function Register() {
       );
       const valid = result.user.email;
       if (isEmpty(valid)) {
-        await axios.post(`${process.env.REACT_APP_URL}/createuser`, values, {
+        const response=await axios.post(`${process.env.REACT_APP_URL}/createuser`, values, {
           withCredentials: true,
         });
+        const { token } = response.data;
+        localStorage.setItem("token", token);
         notification.success({ message: "Register Successfully" });
       }
     } catch (err) {
@@ -62,21 +67,25 @@ function Register() {
   };
 
   const fetchData = async () => {
-    try {
-      const result = await axios.get(`${process.env.REACT_APP_URL}/me`, {
-        withCredentials: true,
-      });
-      console.log(result,"jhkh")
-      setData(result.data)
-     
-      if (!isEmpty(data)) {
-        navigate("/");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const token = localStorage.getItem("token");
 
+    await axios
+      .get(`${process.env.REACT_APP_URL}/validateToken`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+
+        if (!isEmpty(response.data)) {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
  
 
   useEffect(() => {
