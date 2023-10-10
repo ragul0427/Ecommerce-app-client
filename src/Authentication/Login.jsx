@@ -25,12 +25,15 @@ function Login() {
       console.log(result)  
       if (!isEmpty(result)) {
         console.log(result)  
-        await axios.post(
+        const response=await axios.post(
           `${process.env.REACT_APP_URL}/getuser`,
           result.user,
           { withCredentials: true }
         );
-        fetchData()
+        const {token}=response.data;
+        console.log(token,"lll")
+        localStorage.setItem("token", token);
+       
       }
       
     } catch (err) {
@@ -40,7 +43,7 @@ function Login() {
 
   const handleFinish = async (values) => {
     try {
-      const result = await axios.post(
+      const response = await axios.post(
         `${process.env.REACT_APP_URL}/getuser`,
         values,
         {
@@ -48,7 +51,10 @@ function Login() {
         }
       );
      
-      fetchData();
+      const {token}=response.data;
+      console.log(token,"lll")
+
+      localStorage.setItem("token", token);
     } catch (err) {
       console.log(err);
     }
@@ -56,21 +62,21 @@ function Login() {
 
  
 
-  const fetchData = async () => {
-    try {
-      const result = await axios.get(`${process.env.REACT_APP_URL}/validateToken`, {
-        withCredentials: true,
-      });
+  // const fetchData = async () => {
+  //   try {
+  //     const result = await axios.get(`${process.env.REACT_APP_URL}/validateToken`, {
+  //       withCredentials: true,
+  //     });
       
-      setData(result.data)
+  //     setData(result.data)
      
-      if (!isEmpty(result.data)) {
-        navigate("/");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     if (!isEmpty(result.data)) {
+  //       navigate("/");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   useEffect(() => {
      dispatch(changeUservalues(data));
