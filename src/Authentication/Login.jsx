@@ -16,12 +16,10 @@ function Login() {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [data, setData] = useState("");
-  const value = useSelector((state) => state.user.user);
 
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result);
       if (!isEmpty(result)) {
         console.log(result);
         const response = await axios.post(
@@ -30,7 +28,6 @@ function Login() {
           { withCredentials: true }
         );
         const { token } = response.data;
-        console.log(token, "lll");
         localStorage.setItem("token", token);
 
         fetchData();
@@ -52,7 +49,6 @@ function Login() {
 
       const { token } = response.data;
       console.log(token, "lll");
-
       localStorage.setItem("token", token);
 
       fetchData();
@@ -64,30 +60,31 @@ function Login() {
   const fetchData = async () => {
     const token = localStorage.getItem("token");
 
-    await axios
-      .get(`${process.env.REACT_APP_URL}/validateToken`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setData(response.data);
-
-        if (!isEmpty(response.data)) {
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+   try{
+    const result=await axios
+    .get(`${process.env.REACT_APP_URL}/validateToken`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    dispatch(changeUservalues(result.data));
+    if(!isEmpty(result.data)){
+      navigate("/")
+    }
+   }catch(err){
+    console.log(err)
+   }
+     
   };
 
   useEffect(() => {
-    dispatch(changeUservalues(data));
+    
     if (!isEmpty(data)) {
       navigate("/");
     }
   }, [data, navigate]);
+
+  console.log(data,"ah")
 
   return (
     <div

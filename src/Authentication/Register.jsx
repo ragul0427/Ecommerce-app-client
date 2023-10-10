@@ -32,8 +32,6 @@ function Register() {
         const { token } = response.data;
         localStorage.setItem("token", token);
       }
-     
-
       fetchData()
     
     } catch (err) {

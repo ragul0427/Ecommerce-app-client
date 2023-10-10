@@ -19,7 +19,7 @@ function Categories() {
       {CategoriesList.map((res, i) => {
         return (
           <div className="h-[30vh] lg:h-[45vh] w-screen flex items-center mt-2 bg-white" key={res.id}>
-            <div className="h-[100%] w-[40vw] lg:w-[20vw] px-10 flex flex-col gap-5 items-center justify-center">
+            <div className="h-[100%] w-[30vw] lg:w-[20vw] px-10 flex flex-col gap-5 items-center justify-center">
               <p className="text-sm font-semibold lg:text-3xl text-center">{res.catName}</p>
               <button className="bg-[#2874F0] text-sm w-[22vw] lg:w-[8vw] h-[5vh]  text-white font-semibold  rounded-md">
                 View All
@@ -35,15 +35,15 @@ function Categories() {
                 clickable: true,
               }}
               modules={[Grid, Navigation,FreeMode]}
-              className="flex bg-white"
+              className="flex bg-white !w-[100vw]"
               breakpoints={{
                 640: {
                   slidesPerView: 1,
-                  spaceBetween: 10,
+                  spaceBetween: 0,
                 },
                 768: {
                   slidesPerView: 2,
-                  spaceBetween: 15,
+                  spaceBetween: 0,
                 },
                 1024: {
                   slidesPerView: 3,
@@ -59,10 +59,10 @@ function Categories() {
               {res.catNames.map((data, i) => {
                
                 return (
-                  <SwiperSlide className="!w-[25%]  !flex !flex-col items-center justify-center">
-                    <img src={`${data.image}`} className="w-[30vw] lg:!w-[15vw]" />
-                    <span>{data.name}</span>
-                    <span>From {data.price}</span>
+                  <SwiperSlide className="!w-[45%] sm:!w-[32%] lg:!w-[25%] xl:!w-[20%]  !flex !flex-col items-center ">
+                    <img src={`${data.image}`} className="w-[15vw] lg:!w-[10vw]" />
+                    <span className="text-[10px] sm:text-[12px] md:text-[15px] lg:text-lg font-medium">{data.name}</span>
+                    <span className="text-[10px] sm:text-[12px] md:text-[15px] lg:text-lg font-medium">From {data.price}</span>
                   </SwiperSlide>
                 );
               })}

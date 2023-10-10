@@ -22,28 +22,29 @@ body{
   @media(max-width:560px){
     .swiper-button-prev, .swiper-button-next{
       color: #000120 !important;
-      padding:30px 15px 30px 15px !important;
+      padding:20px 10px 20px 10px !important;
       background-color: white !important;
       border-radius: 5px;
       font-size: 12px !important;
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     } 
 
-    .swiper-slide {
-      width: 100% !important;
-    }
+  
+  
   }
 
 
-  @media(max-width:720px){
+  @media(min-width:560px){
     .swiper-button-prev, .swiper-button-next{
       color: #000120 !important;
-      padding:30px 15px 30px 15px !important;
+      padding:40px 20px 40px 20px !important;
       background-color: white !important;
       border-radius: 5px;
       font-size: 10px !important;
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
     } 
+
+    
   }
 
   .swiper-button-prev:after, .swiper-button-next:after {
