@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swipper from "./Swipper";
 import { Image } from "antd";
+import ArrowRightAltOutlinedIcon from '@mui/icons-material/ArrowRightAltOutlined';
 
 function CategoriesHeader() {
   const navigate = useNavigate();
@@ -62,10 +63,12 @@ function CategoriesHeader() {
     },
   ];
   return (
-    <div>
-      <div className="h-[14vh] bg-white px-4 overflow-x-scroll lg:px-40 flex items-center gap-12 justify-between">
+    <div className="bg-white">
+     <p className="flex items-end justify-end pr-8 pt-1 xl:hidden">
+      <ArrowRightAltOutlinedIcon/>
+     </p>
+      <div className="h-[14vh]  px-4 overflow-x-scroll lg:px-40 flex items-center gap-12 justify-between">
         {Categories.map((res, i) => {
-         
           return (
             <div className="flex flex-col justify-center " key={i}>
              <div className="flex items-center justify-center">
