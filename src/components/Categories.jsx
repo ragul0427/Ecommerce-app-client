@@ -63,7 +63,7 @@ function Categories() {
                 return (
                   <SwiperSlide className="!w-[48%]  sm:!w-[32%] lg:!w-[25%] xl:!w-[17%] !flex !flex-col items-center ">
                     <div className="h-[20vh] lg:h-[25vh] flex items-center justify-center  px-2">
-                    <img src={`${data.image}`} className="w-[fit] h-[90%] lg:h-[90%] lg:!w-fit" />
+                    <img src={`${data.image}`} className="!w-[fit] h-[70%] lg:h-[90%] lg:!w-fit" />
                     </div>
                     <span className="text-[10px] sm:text-[12px] md:text-[15px] lg:text-lg  font-medium">{data.name}</span>
                     <span className="text-[10px] sm:text-[12px] md:text-[15px] lg:text-lg  font-medium">From {data.price}</span>
