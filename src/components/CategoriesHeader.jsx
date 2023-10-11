@@ -67,14 +67,14 @@ function CategoriesHeader() {
      <p className="flex items-end justify-end pr-8 pt-1 xl:hidden">
       <ArrowRightAltOutlinedIcon/>
      </p>
-      <div className="h-[14vh]  px-4 overflow-x-scroll lg:px-40 flex items-center gap-12 justify-between">
+      <div className="h-[12vh] lg:h-[14vh]  px-4 overflow-x-scroll lg:px-40 flex items-center gap-x-12 justify-between">
         {Categories.map((res, i) => {
           return (
             <div className="flex flex-col justify-center " key={i}>
              <div className="flex items-center justify-center">
-             <Image src={`${res.image}`} width={60} height={60} preview={false} className="cursor-pointer "/>
+             <Image src={`${res.image}`} width={50} height={50} preview={false} className="cursor-pointer "/>
                 </div>
-              <span className="text-[14px] hover:text-[#2874F0] cursor-pointer font-semibold">{res.name}</span>
+              <span className="text-[10px] lg:text-[14px] hover:text-[#2874F0] cursor-pointer font-semibold">{res.name}</span>
             </div>
           );
         })}

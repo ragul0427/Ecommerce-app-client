@@ -26,7 +26,7 @@ function Categories() {
               </button>
             </div>
 
-         <div className="w-[70vw] lg:w-[80vw] ml-[-60px]">
+         <div className="w-[70vw] lg:w-[80vw] lg:ml-[-60px]">
          <Swiper
              freeMode={true}
               grid={{
