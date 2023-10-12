@@ -111,6 +111,8 @@ function SubCategories() {
     setSelectedPriceRange(selectedValues);
 
     localStorage.setItem("selectedPriceRange", selectedValues);
+
+    setOpen(false)
   };
 
   const onChange = () => {};
