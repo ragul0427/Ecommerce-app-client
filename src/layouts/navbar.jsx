@@ -3,7 +3,7 @@ import { Avatar, Drawer, Form, Input, Button } from "antd";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import isEmpty from "lodash";
 import { changeUservalues } from "../Redux/userSlice";
@@ -13,6 +13,7 @@ function Navbar() {
   const [cookie, setCookie] = useState("");
   const value = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+  const location=useLocation()
 
   const logOut = () => {
     console.log("click")
@@ -21,10 +22,15 @@ function Navbar() {
     dispatch(changeUservalues(res));
   };
 
-  console.log(value, "lll");
+  useEffect(()=>{
+    if(!location.pathname.split("/").includes("subcategories")){
+      localStorage.removeItem("selectedPriceRange")
+    }
+  })
 
   return (
-    <div className="h-20 w-screen">
+    <div className="h-12 lg:h-20 w-screen">
+      <div className="fixed z-40">
       <div className="pl-20 hidden h-8 text-[14px] bg-white text-black lg:flex justify-between items-center">
         <div className="flex gap-20 items-center font-bold ">
           <div className="hover:text-[#2874F0] cursor-pointer">About</div>
@@ -71,6 +77,7 @@ function Navbar() {
             Login
           </Button>
         )}
+      </div>
       </div>
     </div>
   );

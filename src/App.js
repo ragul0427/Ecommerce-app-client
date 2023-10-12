@@ -9,6 +9,7 @@ import { Swipper,CategoriesHeader } from "./components/index";
 import { Product } from "./screens";
 import Register from "./Authentication/Register";
 import Login from "./Authentication/Login";
+import SubCategories from "./components/SubCategories";
 
 
 const router = createBrowserRouter(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route path="product" element={<Product />} />
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
+      <Route path="subcategories/:id" element={<SubCategories />} />
     </Route>
   )
 );

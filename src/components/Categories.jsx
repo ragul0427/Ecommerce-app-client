@@ -13,8 +13,9 @@ import {useNavigate} from "react-router-dom"
 
 function Categories() {
   const value=useSelector((state)=>state.user.user)
+  const navigate=useNavigate()
  
-  return (
+  return (  
     <div>
       {CategoriesList.map((res, i) => {
         return (
@@ -36,7 +37,7 @@ function Categories() {
                 clickable: true,
               }}
               modules={[Grid, Navigation,FreeMode]}
-              className="mySwiper !w-[70vw] lg:w-[80vw] mt-3"
+              className="!w-[70vw] lg:w-[80vw] mt-3"
           
               breakpoints={{
                 640: {
@@ -61,7 +62,7 @@ function Categories() {
               {res.catNames.map((data, i) => {
                
                 return (
-                  <SwiperSlide className="!w-[48%]  sm:!w-[32%] lg:!w-[25%] xl:!w-[17%] !flex !flex-col items-center ">
+                  <SwiperSlide className="!w-[48%]  sm:!w-[32%] lg:!w-[25%] xl:!w-[17%] !flex !flex-col items-center cursor-pointer" onClick={()=>{navigate(`/subcategories/${data.id}`)}}>
                     <div className="h-[20vh] lg:h-[25vh] flex items-center justify-center  px-2">
                     <img src={`${data.image}`} className="!w-[fit] h-[70%] lg:h-[90%] lg:!w-fit" />
                     </div>
