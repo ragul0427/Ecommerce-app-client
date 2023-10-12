@@ -64,7 +64,7 @@ function CategoriesHeader() {
   ];
   return (
     <div>
-      <div className="fixed h-[15vh] lg:14vh bg-white z-40">
+      <div className="fixed h-[15vh] lg:15vh lg:pt-3 bg-white z-40">
         <p className="flex items-end justify-end pr-8 pt-1 xl:hidden">
           <ArrowRightAltOutlinedIcon />
         </p>
