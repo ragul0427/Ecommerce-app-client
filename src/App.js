@@ -5,11 +5,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
-import { Swipper,CategoriesHeader } from "./components/index";
+import { Swipper,CategoriesHeader,SubCategories,ExploreCategories } from "./components";
 import { Product } from "./screens";
 import Register from "./Authentication/Register";
 import Login from "./Authentication/Login";
-import SubCategories from "./components/SubCategories";
+
 
 
 const router = createBrowserRouter(
@@ -20,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="register" element={<Register />} />
       <Route path="login" element={<Login />} />
       <Route path="subcategories/:id" element={<SubCategories />} />
+      <Route path="ExploreCategories/:id" element={<ExploreCategories />} />
     </Route>
   )
 );

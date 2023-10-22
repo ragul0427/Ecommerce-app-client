@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swipper from "./Swipper";
 import { Image } from "antd";
+import { CategoriesList } from "../helper/categories";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 
 function CategoriesHeader() {
   const navigate = useNavigate();
+  const [data, setData] = useState("");
+  const [categories, setCategories] = useState("");
   const Categories = [
     {
       id: 1,
       name: "Grocery",
+      catId:10,
       image:
         "https://rukminim2.flixcart.com/flap/128/128/image/29327f40e9c4d26b.png?q=100",
     },
@@ -28,12 +33,14 @@ function CategoriesHeader() {
     {
       id: 4,
       name: "Electronics",
+      catId:21,
       image:
         "https://rukminim2.flixcart.com/flap/128/128/image/69c6589653afdb9a.png?q=100",
     },
     {
       id: 5,
       name: "Homes&Furnitures",
+      catId:25,
       image:
         "https://rukminim2.flixcart.com/flap/128/128/image/ab7e2b022a4587dd.jpg?q=100",
     },
@@ -51,27 +58,41 @@ function CategoriesHeader() {
     },
     {
       id: 8,
-      name: "Beauty,Toys and more",
+      name: "Beauty,Food,Toys&more",
+      catId:22,
       image:
         "https://rukminim2.flixcart.com/flap/128/128/image/dff3f7adcf3a90c6.png?q=100",
     },
     {
       id: 9,
-      name: "Two Wheelers",
+      name: "TwoWheelers",
       image:
         "https://rukminim2.flixcart.com/fk-p-flap/128/128/image/05d708653beff580.png?q=100",
     },
   ];
+
+  const mouseOver = (res) => {
+    console.log("looo", res.name);
+    setData(res);
+    setCategories(
+      CategoriesList.filter((data, i) => {
+        return data.id===res.catId
+      })[0]
+    );
+  };
+
+
   return (
     <div>
-      <div className="fixed h-[15vh] lg:15vh lg:pt-3 bg-white z-40">
+      <div
+        className="fixed h-[15vh] lg:15vh lg:pt-3 bg-white z-40">
         <p className="flex items-end justify-end pr-8 pt-1 xl:hidden">
           <ArrowRightAltOutlinedIcon />
         </p>
-        <div className=" !w-screen  px-4 overflow-x-scroll lg:px-40 flex items-center gap-x-12 justify-between">
+        <div className=" !w-screen  px-4 overflow-x-scroll lg:px-36 flex items-center gap-x-12 justify-between">
           {Categories.map((res, i) => {
             return (
-              <div className="flex flex-col justify-center" key={i}>
+              <div className="flex flex-col justify-center h-[100%]" key={i}>
                 <div className="flex items-center justify-center">
                   <Image
                     src={`${res.image}`}
@@ -81,9 +102,31 @@ function CategoriesHeader() {
                     className="cursor-pointer "
                   />
                 </div>
-                <span className="text-[10px] lg:text-[14px] hover:text-[#2874F0] cursor-pointer font-semibold">
-                  {res.name}
-                </span>
+                <p
+                  className="text-[10px]  flex lg:text-[14px] hover:text-[#2874F0] cursor-pointer font-semibold"
+                  onMouseOver={() => {
+                    mouseOver(res);
+                  }}
+                >
+                  <span>{res.name}</span>
+                  {/* <span>
+                    <KeyboardArrowDownIcon />
+                  </span> */}
+                </p>
+                {/* <div
+                  className={`${
+                    data.id === res.id ? "flex" : "hidden"
+                  } bg-white absolute top-[15vh]  gap-20 px-5 left-12 h-[50vh]  flex w-[95vw]`}
+                  onMouseOut={()=>{setData("")}}
+                >
+                  {categories?.catNames?.map((res, i) => {
+                    return (
+                      <div key={i} className="flex border-r pr-2">
+                        {res.name}
+                      </div>
+                    );
+                  })}
+                </div> */}
               </div>
             );
           })}

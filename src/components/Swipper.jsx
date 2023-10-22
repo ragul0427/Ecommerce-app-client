@@ -45,7 +45,7 @@ export default function Swipper() {
         autoplay={{ delay: 2000 }}
       >
         {Banners.map((res, i) => {
-          console.log(res.image);
+         
           return (
             <SwiperSlide key={res.id}>
               <div>

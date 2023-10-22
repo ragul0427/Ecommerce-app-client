@@ -3,12 +3,14 @@ import { Card, Checkbox, List, Image, Drawer } from "antd";
 import { subCategories } from "../helper/subCategories";
 import { useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
 function SubCategories() {
   const [subCategory, setSubCategory] = useState(subCategories);
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  console.log(location.pathname.split("/")[2]);
+  const [selectedValues, setSelectedValues] = useState("");
+
   const [selectedPriceRange, setSelectedPriceRange] = useState(() => {
     return localStorage.getItem("selectedPriceRange") || "";
   });
@@ -96,26 +98,53 @@ function SubCategories() {
       );
     });
 
-    if (selectedPriceRange == "") {
-      setSubCategory(
-        subCategories.filter((res, i) => {
-          return res.categoryId == location.pathname.split("/")[2];
-        })
-      );
+    const selectedBrand = selectedValues.toLowerCase();
+    const filteredBrands = subCategories.filter((res, i) => {
+      return res?.brand?.toLowerCase() == selectedBrand;
+    });
+
+    if (selectedPriceRange !== "" && selectedValues !== "") {
+      // setSubCategory(
+      //   subCategories.filter((res, i) => {
+      //     return res.categoryId == location.pathname.split("/")[2];
+      //   })
+      // );
+      console.log("true");
+    } else if (selectedPriceRange !== "" && selectedValues !== "") {
+      console.log("true");
     } else {
-      setSubCategory(filteredProducts);
+      if (selectedPriceRange === "" && selectedValues === "") {
+        setSubCategory(
+          subCategories.filter((res, i) => {
+            return res.categoryId == location.pathname.split("/")[2];
+          })
+        );
+      } else if (selectedPriceRange == "") {
+        setSubCategory(filteredBrands);
+      } else {
+        setSubCategory(filteredProducts);
+      }
     }
-  }, [localStorage.getItem("selectedPriceRange")]);
+  }, [
+    localStorage.getItem("selectedPriceRange"),
+    localStorage.getItem("selectedBrand"),
+    subCategories,
+    selectedPriceRange,
+    selectedValues,
+    location.pathname.split("/")[2],
+  ]);
 
   const onPriceChange = (selectedValues) => {
     setSelectedPriceRange(selectedValues);
-
     localStorage.setItem("selectedPriceRange", selectedValues);
-
-    setOpen(false)
+    setOpen(false);
   };
 
-  const onChange = () => {};
+  const onChange = (e) => {
+    setSelectedValues(e.target.value);
+    localStorage.setItem("selectedBrand", e.target.value);
+    setOpen(false);
+  };
   return (
     <div className="flex ">
       <div
@@ -128,37 +157,41 @@ function SubCategories() {
       </div>
       <div className="!w-[40vw] hidden sm:block lg:!w-[20vw] gap-5 pt-5 pl-5 bg-white h-[90vh]">
         <div className="fixed">
-        <h1>price to price</h1>
-        <div className="flex flex-wrap !text-[12px] pt-3 !w-[40vw] lg:!w-[20vw]">
-          {options.map((option) => (
-            <Checkbox
-              key={option.value}
-              value={option.value}
-              checked={selectedPriceRange === option.value}
-              onChange={() => onPriceChange(option.value)}
-            >
-              {option.label}
-            </Checkbox>
-          ))}
-        </div>
-        <h1>Choose Brand</h1>
-        <div className="flex flex-wrap pt-3">
-          <Checkbox.Group
-            options={brands}
-            defaultValue={["Pear"]}
-            className="!text-xl"
-            onChange={onChange}
-          />
-        </div>
+          <h1>price to price</h1>
+          <div className="flex flex-wrap pr-2 gap-3 !text-[12px] pt-3 !w-[40vw] lg:!w-[20vw]">
+            {options.map((option) => (
+              <Checkbox
+                key={option.value}
+                value={option.value}
+                checked={selectedPriceRange === option.value}
+                onChange={() => onPriceChange(option.value)}
+              >
+                {option.label}
+              </Checkbox>
+            ))}
+          </div>
+          <h1 className="pt-4">Choose Brand</h1>
+          <div className="flex pr-3 flex-wrap gap-3 !text-[12px] pt-3 !w-[40vw] lg:!w-[20vw]">
+            {brands.map((option) => (
+              <Checkbox
+                value={option.value}
+                key={option.value}
+                checked={selectedValues === option.value}
+                onChange={onChange}
+              >
+                {option.label}
+              </Checkbox>
+            ))}
+          </div>
         </div>
       </div>
       <div>
         <List
-          className="xsm:!w-[80vw] lg:!w-[75vw]"
+          className="xsm:!w-[90vw] lg:!w-[75vw]"
           dataSource={subCategory}
           grid={{
             gutter: 16,
-            xs: 1,
+            xs: 2,
             sm: 1,
             md: 2,
             lg: 3,
@@ -173,16 +206,27 @@ function SubCategories() {
           }}
           renderItem={(data, index) => {
             return (
-              <List.Item className="!flex flex-wrap w-[100vw] lg:w-[60vw] !pt-3 !pl-2">
-                <Card className="xl:w-[18vw] lg:w-[22vw] md:w-[30vw] xsm:!w-[90vw] h-[38vh] flex flex-col items-center justify-center">
-                  <Image
-                    src={data.image}
-                    width={140}
-                    height={140}
-                    preview={false}
-                  />
-                  <p className="text-center">{data.name}</p>
-                  <p className="text-center">{data.price}</p>
+              <List.Item className="!flex flex-wrap items-start justify-center w-[100vw] lg:w-[60vw] !pt-3 ">
+                <Card className="xl:w-[18vw] lg:w-[22vw] md:w-[30vw] xsm:!w-[44vw] h-[38vh] flex flex-col items-center justify-center">
+                  <div className="flex flex-col items-center justify-center">
+                    <Image
+                      src={data.image}
+                      width={120}
+                      height={120}
+                      preview={false}
+                    />
+                    <p className="text-center cursor-pointer">{data.name}</p>
+                    <p className="text-center">{data.price}</p>
+                  </div>
+
+                  <div className="flex gap-3 items-center rounded-md justify-between pt-2">
+                    <p className="bg-green-500 py-1 cursor-pointer px-5 md:px-10 rounded-md text-white text-[13px]">
+                      <ShoppingCartCheckoutIcon className="!text-[18px]" />
+                    </p>
+                    <p className="bg-red-500 cursor-pointer px-5 py-1 md:px-10 rounded-md text-[13px] text-white">
+                      Buy
+                    </p>
+                  </div>
                 </Card>
               </List.Item>
             );

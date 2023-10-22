@@ -1,2 +1,5 @@
 export {default as Swipper} from "./Swipper"
 export {default as CategoriesHeader} from "./CategoriesHeader"
+export {default as Categories} from "./Categories"
+export {default as SubCategories} from "./SubCategories"
+export {default as ExploreCategories} from "./ExploreCategories"

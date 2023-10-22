@@ -3,6 +3,7 @@ export const subCategories = [
     id: 11,
     categoryId: 1,
     name: "Vivo",
+    brand:"Vivo",
     price:19999,
     image:
       "https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg",
@@ -10,7 +11,8 @@ export const subCategories = [
   {
     id: 12,
     categoryId: 1,
-    name: "Vivo",
+    name: "Redmi note 12",
+    brand:"MI",
     price:1999,
     image:
       "https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg",
@@ -18,7 +20,8 @@ export const subCategories = [
   {
     id: 13,
     categoryId: 1,
-    name: "Vivo",
+    name: "Poco m12",
+    brand:"Poco",
     price:10999,
     image:
       "https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg",
@@ -26,7 +29,8 @@ export const subCategories = [
   {
     id: 14,
     categoryId: 1,
-    name: "Vivo",
+    name: "Realme 10 pro",
+    brand:"Realme",
     price:20999,
     image:
       "https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg",
@@ -34,7 +38,8 @@ export const subCategories = [
   {
     id: 15,
     categoryId: 1,
-    name: "Vivo",
+    name: "Oneplus nord 2t",
+    brand:"Oneplus",
     price:30999,
     image:
       "https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg",
