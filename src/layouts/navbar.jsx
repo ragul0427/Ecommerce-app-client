@@ -25,6 +25,7 @@ function Navbar() {
   useEffect(()=>{
     if(!location.pathname.split("/").includes("subcategories")){
       localStorage.removeItem("selectedPriceRange")
+      localStorage.removeItem("selectedBrand")
     }
   })
 
