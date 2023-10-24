@@ -108,6 +108,19 @@ function SubCategories() {
 
     if (selectedPriceRange !== "" && selectedValues !== "") {
       console.log("true");
+      console.log(subCategory,"wdbhkbhb")
+      const filteredProducts = subCategories.filter((product) => {
+        const price = parseInt(product.price);
+        console.log(selectedBrand,product.brand,"price")
+        return (
+          price >= min &&
+          price <= max &&
+          product.categoryId == location.pathname.split("/")[2]&&
+          product.brand.toLowerCase()==selectedBrand.toLowerCase()
+        );
+      });
+
+      setSubCategory(filteredProducts)
     } else {
       if (selectedPriceRange === "" && selectedValues === "") {
         setSubCategory(
@@ -234,7 +247,7 @@ function SubCategories() {
           renderItem={(data, index) => {
             return (
               <List.Item className="!flex flex-wrap items-start justify-center w-[100vw] lg:w-[60vw] !pt-3 ">
-                <Card className="xl:w-[18vw] lg:w-[22vw] md:w-[30vw] xsm:!w-[44vw] h-[34vh] md:h-[38vh] flex flex-col items-center justify-center">
+                <Card className="xl:w-[18vw] lg:w-[22vw] md:w-[30vw] xsm:!w-[44vw] flex flex-col items-center justify-center">
                   <div className="flex flex-col items-center justify-center">
                     <Image
                       src={data.image}
