@@ -232,7 +232,7 @@ function SubCategories() {
           grid={{
             gutter: 16,
             xs: 2,
-            sm: 1,
+            sm: 2,
             md: 2,
             lg: 3,
             xl: 4,
