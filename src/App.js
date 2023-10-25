@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
-import { Swipper,CategoriesHeader,SubCategories,ExploreCategories } from "./components";
+import { Swipper,CategoriesHeader,SubCategories,ExploreCategories, ExploreProduct } from "./components";
 import { Product } from "./screens";
 import Register from "./Authentication/Register";
 import Login from "./Authentication/Login";
@@ -21,6 +21,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="subcategories/:id" element={<SubCategories />} />
       <Route path="ExploreCategories/:id" element={<ExploreCategories />} />
+      <Route path="ExploreProduct/:id" element={<ExploreProduct />} />
     </Route>
   )
 );

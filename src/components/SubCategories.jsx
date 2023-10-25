@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, Checkbox, List, Image, Drawer } from "antd";
 import { subCategories } from "../helper/subCategories";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
@@ -9,6 +9,7 @@ function SubCategories() {
   const [subCategory, setSubCategory] = useState(subCategories);
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate=useNavigate()
   const [dummy, setDummy] = useState("");
   const [selectedValues, setSelectedValues] = useState(() => {
     return localStorage.getItem("selectedBrand") || "";
@@ -256,7 +257,7 @@ function SubCategories() {
                       preview={false}
                       
                     />
-                    <p className="text-center cursor-pointer">{data.name}</p>
+                    <p className="text-center cursor-pointer" onClick={()=>{navigate(`/ExploreProduct/${data.id}`)}}>{data.name}</p>
                     <p className="text-center">{data.price}</p>
                   </div>
 

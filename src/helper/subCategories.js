@@ -2,7 +2,7 @@ export const subCategories = [
   {
     id: 11,
     categoryId: 1,
-    name: "Vivo",
+    name: "Vivo Y100",
     brand:"Vivo",
     price:19999,
     image:
@@ -11,7 +11,7 @@ export const subCategories = [
   {
     id: 12,
     categoryId: 1,
-    name: "Redmi note 12",
+    name: "Redmi note 12 pro plus",
     brand:"MI",
     price:1999,
     image:
