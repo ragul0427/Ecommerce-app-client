@@ -62,7 +62,7 @@ function Navbar() {
             </Form.Item>
           </Form>
         </div>
-        <div className="hidden md:block cursor-pointer">
+        <div className="hidden md:block cursor-pointer" onClick={()=>{navigate("/Cart/12")}}>
           <ShoppingCartIcon />
           Cart
         </div>

@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Card, Checkbox, List, Image, Drawer } from "antd";
 import { subCategories } from "../helper/subCategories";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { useDispatch } from "react-redux";
+import { addCartProducts } from "../Redux/cartSlice";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 function SubCategories() {
   const [subCategory, setSubCategory] = useState(subCategories);
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const navigate=useNavigate()
-  const [dummy, setDummy] = useState("");
+  const navigate = useNavigate();
+  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
   const [selectedValues, setSelectedValues] = useState(() => {
     return localStorage.getItem("selectedBrand") || "";
   });
@@ -109,19 +113,19 @@ function SubCategories() {
 
     if (selectedPriceRange !== "" && selectedValues !== "") {
       console.log("true");
-      console.log(subCategory,"wdbhkbhb")
+      console.log(subCategory, "wdbhkbhb");
       const filteredProducts = subCategories.filter((product) => {
         const price = parseInt(product.price);
-        console.log(selectedBrand,product.brand,"price")
+        console.log(selectedBrand, product.brand, "price");
         return (
           price >= min &&
           price <= max &&
-          product.categoryId == location.pathname.split("/")[2]&&
-          product.brand.toLowerCase()==selectedBrand.toLowerCase()
+          product.categoryId == location.pathname.split("/")[2] &&
+          product.brand.toLowerCase() == selectedBrand.toLowerCase()
         );
       });
 
-      setSubCategory(filteredProducts)
+      setSubCategory(filteredProducts);
     } else {
       if (selectedPriceRange === "" && selectedValues === "") {
         setSubCategory(
@@ -163,31 +167,30 @@ function SubCategories() {
     localStorage.removeItem("selectedBrand");
     setSelectedPriceRange("");
     setSelectedValues("");
-    setOpen(false)
+    setOpen(false);
   };
 
- 
+  const addCart = (data) => {
+    console.log("clci", data);
+    const updatedCart = [...cart, data];
+    setCart(updatedCart);
+    dispatch(addCartProducts(updatedCart));
+  };
+
   return (
-    <div className="flex ">
-      <div
-        className="sm:hidden pt-5 pl-2"
-        onClick={() => {
-          setOpen(!open);
-        }}
-      >
-        <MenuIcon />
-      </div>
+    <div>
+     
       <div className="!w-[40vw] hidden sm:block lg:!w-[20vw] gap-5 pt-5 pl-5 bg-white h-[90vh]">
         <div className="fixed">
           <div className="flex !w-[18vw] justify-between">
             <h1>price to price</h1>
             <Checkbox
               checked={
-                (selectedPriceRange=="" && selectedValues == "") ||
-                (localStorage.getItem("selectedPriceRange")==null &&
+                (selectedPriceRange == "" && selectedValues == "") ||
+                (localStorage.getItem("selectedPriceRange") == null &&
                   localStorage.getItem("selectedBrand") == null)
                   ? true
-                  : selectedPriceRange !==""||selectedValues!== ""
+                  : selectedPriceRange !== "" || selectedValues !== ""
                   ? false
                   : ""
               }
@@ -226,7 +229,16 @@ function SubCategories() {
           </div>
         </div>
       </div>
-      <div>
+
+      <div
+        className="sm:hidden h-[5vh]  bg-white flex items-center pl-2 "
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
+        <FilterAltIcon /> Choose Filters
+      </div>
+      <div className="pl-2">
         <List
           className="xsm:!w-[90vw] lg:!w-[75vw]"
           dataSource={subCategory}
@@ -242,27 +254,41 @@ function SubCategories() {
           pagination={{
             pageSize: 8,
             align: "end",
-            position: "top",
+            position: "bottom",
             size: "small",
+           
           }}
           renderItem={(data, index) => {
             return (
-              <List.Item className="!flex flex-wrap items-start justify-center w-[100vw] lg:w-[60vw] !pt-3 ">
-                <Card className="xl:w-[18vw] lg:w-[22vw] md:w-[30vw] xsm:!w-[44vw] flex flex-col items-center justify-center">
-                  <div className="flex flex-col items-center justify-center">
+              <List.Item className=" !flex flex-wrap items-center justify-center w-[100vw] lg:w-[60vw] !pt-3 ">
+                <Card className="xl:w-[18vw] lg:w-[22vw] md:w-[30vw] xsm:!w-[47vw] flex flex-col items-center justify-center ">
+                  <div className="flex flex-col  items-center justify-center">
                     <Image
                       src={data.image}
                       width={120}
                       height={120}
                       preview={false}
-                      
                     />
-                    <p className="text-center cursor-pointer" onClick={()=>{navigate(`/ExploreProduct/${data.id}`)}}>{data.name}</p>
-                    <p className="text-center">{data.price}</p>
+                    <div className="w-[38vw]">
+                    <p
+                      className="text-center cursor-pointer text-[12px] md:text-[18px] line-clamp-1 text-ellipsis overflow-hidden"
+                      onClick={() => {
+                        navigate(`/ExploreProduct/${data.id}`);
+                      }}
+                    >
+                      {data.name}
+                    </p>
+                    </div>
+                    <p className="text-center text-[12px] md:text-[18px]">{data.price}</p>
                   </div>
 
                   <div className="flex gap-3 items-center rounded-md justify-between pt-2">
-                    <p className="bg-green-500 py-1 cursor-pointer px-5 md:px-10 rounded-md text-white text-[13px]">
+                    <p
+                      className="bg-green-500 py-1 cursor-pointer px-5 md:px-10 rounded-md text-white text-[13px]"
+                      onClick={() => {
+                        addCart(data);
+                      }}
+                    >
                       <ShoppingCartCheckoutIcon className="!text-[18px]" />
                     </p>
                     <p className="bg-red-500 cursor-pointer px-5 py-1 md:px-10 rounded-md text-[13px] text-white">
@@ -284,15 +310,15 @@ function SubCategories() {
         width={250}
       >
         <div className="w-[30vw]flex overflow-y-scroll gap-5 pt-5 pl-5 bg-white h-[100%]">
-         <div className="flex justify-between">
-         <h1>price to price</h1>
-         <Checkbox
+          <div className="flex justify-between">
+            <h1>price to price</h1>
+            <Checkbox
               checked={
-                (selectedPriceRange=="" && selectedValues == "") ||
-                (localStorage.getItem("selectedPriceRange")==null &&
+                (selectedPriceRange == "" && selectedValues == "") ||
+                (localStorage.getItem("selectedPriceRange") == null &&
                   localStorage.getItem("selectedBrand") == null)
                   ? true
-                  : selectedPriceRange !==""||selectedValues!== ""
+                  : selectedPriceRange !== "" || selectedValues !== ""
                   ? false
                   : ""
               }
@@ -303,7 +329,7 @@ function SubCategories() {
             >
               All
             </Checkbox>
-         </div>
+          </div>
           <div className="grid !text-[12px] pt-3">
             {options.map((option) => (
               <Checkbox

@@ -23,16 +23,16 @@ function ExploreProduct() {
   return (
     <div className="bg-white md:!h-[100vh]">
       <div className="flex flex-col md:flex-row md:w-[85vw] justify-between m-auto md:pt-5">
-        <div className="md:w-[40vw] bg-white border flex flex-row-reverse border-slate-300">
-          <div className="w-full  md:max-w-[100%] md:h-auto flex items-center justify-center">
+        <div className="md:w-[40vw] bg-white border flex flex-col md:flex-row-reverse border-slate-300">
+          <div className="w-full h-[50vh] md:max-w-[100%] md:h-auto flex items-center justify-center">
             <img src={img} className="h-[80%] md:w-auto md:h-[90%]" />
             {/* <Zoom img={img} zoomScale={3} width={600} height={600} /> */}
           </div>
-          <div className="flex flex-col">
+          <div className="flex md:flex-col">
             {products[0]?.img?.map((res, i) => {
               return (
                 <div
-                  className={`h-[13vh] w-[28vw] md:h-[13vh] md:w-[7vw] bg-white hover:opacity-50 cursor-pointer flex items-center justify-center ${
+                  className={`h-[10vh] w-[28vw] md:h-[13vh] md:w-[7vw] bg-white hover:opacity-50 cursor-pointer flex items-center justify-center ${
                     res === img
                       ? "border-red-600 border-[4px]"
                       : "border-slate-300 border-[2px]"
@@ -42,24 +42,24 @@ function ExploreProduct() {
                     setImg(res);
                   }}
                 >
-                  <img src={res} className="h-[100%]"/>
+                  <img src={res} className="h-[80%] md:h-[100%]"/>
                 </div>
               );
             })}
           </div>
         </div>
         <div className="w-[90vw] m-auto md:w-[38vw] flex flex-col">
-          <h1 className="pt-4 text-2xl md:text-4xl">{products[0]?.title}</h1>
+          <h1 className="pt-2 text-xl md:text-4xl">{products[0]?.title}</h1>
           <p classname="flex ">
             <span>0 reviews</span>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <span>0 ratings</span>
           </p>
 
-          <h1 className="text-2xl pt-4 font-semibold">Highlights</h1>
+          <h1 className="texxt-xl md:text-2xl pt-2 font-semibold">Highlights</h1>
           {products[0]?.description.map((res, i) => {
             return (
-              <ul key={i} className="flex flex-col gap-4 pt-3 pl-4">
+              <ul key={i} className="flex flex-col gap-2 pt-1 pl-4">
                 <li className="list-disc">{res}</li>
               </ul>
             );

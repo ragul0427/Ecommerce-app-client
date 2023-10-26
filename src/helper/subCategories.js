@@ -15,7 +15,7 @@ export const subCategories = [
     brand:"MI",
     price:1999,
     image:
-      "https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg",
+      "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/b/r/f/-original-imaghkvuhzwge3za.jpeg?q=70",
   },
   // {
   //   id: 13,
