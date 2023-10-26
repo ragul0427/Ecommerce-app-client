@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Images } from "../helper/ExploreProducts";
 import { useLocation } from "react-router-dom";
-import ReactImageMagnify from "react-image-magnify";
+import Zoom from "react-img-zoom";
 
 function ExploreProduct() {
   const [img, setImg] = useState(Images[0].img[0]);
@@ -25,30 +25,14 @@ function ExploreProduct() {
       <div className="flex flex-col md:flex-row md:w-[85vw] justify-between m-auto md:pt-5">
         <div className="md:w-[40vw] bg-white border flex flex-row-reverse border-slate-300">
           <div className="w-full  md:max-w-[100%] md:h-auto flex items-center justify-center">
-            <img src={img} className="w-[100%] h-auto md:hidden" />
-            <ReactImageMagnify
-            className="!hidden md:!flex"
-              {...{
-                smallImage: {
-                  alt: "Wristwatch by Ted Baker London",
-                  isFluidWidth: true,
-                  src: img, 
-                  
-                },
-                largeImage: {
-                  src: img,
-                  width: 1000,
-                  height: 1000,
-                },
-              }}
-              
-            />
+            <img src={img} className="h-[80%] md:w-auto md:h-[90%]" />
+            {/* <Zoom img={img} zoomScale={3} width={600} height={600} /> */}
           </div>
           <div className="flex flex-col">
             {products[0]?.img?.map((res, i) => {
               return (
                 <div
-                  className={`w-[20vw] md:w-[6.2vw] bg-white hover:opacity-50 cursor-pointer ${
+                  className={`h-[13vh] w-[28vw] md:h-[13vh] md:w-[7vw] bg-white hover:opacity-50 cursor-pointer flex items-center justify-center ${
                     res === img
                       ? "border-red-600 border-[4px]"
                       : "border-slate-300 border-[2px]"
@@ -58,7 +42,7 @@ function ExploreProduct() {
                     setImg(res);
                   }}
                 >
-                  <img src={res} />
+                  <img src={res} className="h-[100%]"/>
                 </div>
               );
             })}
@@ -71,6 +55,8 @@ function ExploreProduct() {
             &nbsp;&nbsp;&nbsp;&nbsp;
             <span>0 ratings</span>
           </p>
+
+          <h1 className="text-2xl pt-4 font-semibold">Highlights</h1>
           {products[0]?.description.map((res, i) => {
             return (
               <ul key={i} className="flex flex-col gap-4 pt-3 pl-4">
