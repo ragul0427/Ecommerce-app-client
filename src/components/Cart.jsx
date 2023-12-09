@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 function Cart() {
   const cart = useSelector((state) => state.cart.cart);
 
-  // Create a state object to store the count for each product
   const [productCounts, setProductCounts] = useState({});
 
   const updateProductCount = (productId, newCount) => {
@@ -25,7 +24,7 @@ function Cart() {
 
   return (
     <div className="w-[80vw] m-auto mt-8">
-      <div className="text-white rounded-t-md bg-red-500 py-2 px-2 flex justify-between">
+      <div className="text-white rounded-t-md bg-[--bg-color] py-2 px-2 flex justify-between">
         <p>Shopping Cart</p>
         <p>Total: 8828</p>
       </div>
@@ -49,7 +48,7 @@ function Cart() {
             <div className="w-[20vw]">{res.name}</div>
             <div className="w-[20vw] flex items-center gap-3">
               <span
-                className="bg-red-500 text-center px-2 cursor-pointer text-white font-bold"
+                className="bg-[--bg-color] text-center px-2 cursor-pointer text-white font-bold"
                 onClick={() => {
                   Decrement(productId);
                 }}
@@ -58,9 +57,8 @@ function Cart() {
               </span>
               {currentCount}
               <span
-                className="bg-red-500 text-center px-2 cursor-pointer text-white font-bold"
+                className="bg-[--bg-color] text-center px-2 cursor-pointer text-white font-bold"
                 onClick={() => {
-                  // You can increase the count for the specific product
                   updateProductCount(productId, currentCount + 1);
                 }}
               >
@@ -72,7 +70,7 @@ function Cart() {
         );
       })}
 
-      <div className="text-white bg-red-500 rounded-b-md py-1 px-2 flex justify-end">
+      <div className="text-white bg-[--bg-color] rounded-b-md py-1 px-2 flex justify-end">
         <Button className="bg-white">Checkout</Button>
       </div>
     </div>

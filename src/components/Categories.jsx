@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import { CategoriesList } from "../helper/categories";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
-// import required modules
 import { FreeMode, Grid, Navigation } from "swiper/modules";
 import { useSelector } from "react-redux";
 import { isEmpty } from "lodash";
@@ -19,10 +17,10 @@ function Categories() {
     <div>
       {CategoriesList.map((res, i) => {
         return (
-          <div className="h-[27vh] lg:h-[45vh] w-[100vw] flex items-center mt-2 bg-white" key={res.id}>
+          <div key={i} className="h-[27vh] lg:h-[45vh] w-[100vw] flex items-center mt-2 bg-white" >
             <div className="h-[100%] w-[30vw] lg:w-[20vw] px-10 flex flex-col gap-5 items-center justify-center">
               <p className="text-sm font-semibold lg:text-3xl text-center">{res.catName}</p>
-              <button className="bg-[#2874F0] lg:text-sm w-[18vw] lg:w-[8vw] h-[4vh] lg:h-[5vh]  text-white font-semibold text-[11px] rounded-md" onClick={()=>{navigate(`ExploreCategories/${res.id}`)}}>
+              <button className="bg-[--bg-color] lg:text-sm w-[18vw] lg:w-[8vw] h-[4vh] lg:h-[5vh]  text-white font-semibold text-[11px] rounded-md" onClick={()=>{navigate(`ExploreCategories/${res.id}`)}}>
                 View All
               </button>
             </div>

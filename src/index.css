@@ -10,6 +10,11 @@ body{
   background-color: rgb(233, 233, 244) !important;
 }
 
+:root{
+  --bg-color:#0f172a;
+  
+}
+
 .swiper-button-prev, .swiper-button-next{
     color: #000120 !important;
     padding:50px 22px 50px 22px !important;

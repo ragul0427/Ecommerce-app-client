@@ -178,10 +178,10 @@ function SubCategories() {
   };
 
   return (
-    <div>
+    <div className="flex">
      
-      <div className="!w-[40vw] hidden sm:block lg:!w-[20vw] gap-5 pt-5 pl-5 bg-white h-[90vh]">
-        <div className="fixed">
+      <div className="!w-[40vw] fixed hidden sm:block lg:!w-[20vw] gap-5 pt-5 pl-5 bg-white h-[90vh]">
+        <div className="fixed ">
           <div className="flex !w-[18vw] justify-between">
             <h1>price to price</h1>
             <Checkbox
@@ -202,7 +202,7 @@ function SubCategories() {
               All
             </Checkbox>
           </div>
-          <div className="flex flex-wrap pr-2 gap-3 !text-[12px] pt-3 !w-[40vw] lg:!w-[20vw]">
+          <div className="flex flex-wrap pr-2 gap-3  !text-[12px] pt-3 !w-[40vw] lg:!w-[20vw]">
             {options.map((option) => (
               <Checkbox
                 key={option.value}
@@ -238,7 +238,7 @@ function SubCategories() {
       >
         <FilterAltIcon /> Choose Filters
       </div>
-      <div className="pl-2">
+      <div className="pl-2 lg:pl-[25vw]">
         <List
           className="xsm:!w-[90vw] lg:!w-[75vw]"
           dataSource={subCategory}
@@ -269,7 +269,7 @@ function SubCategories() {
                       height={120}
                       preview={false}
                     />
-                    <div className="w-[38vw]">
+                    <div>
                     <p
                       className="text-center cursor-pointer text-[12px] md:text-[18px] line-clamp-1 text-ellipsis overflow-hidden"
                       onClick={() => {

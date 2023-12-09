@@ -5,15 +5,18 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cookies from "js-cookie";
 import { useNavigate,useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import isEmpty from "lodash";
+import isEmpty, { get } from "lodash";
 import { changeUservalues } from "../Redux/userSlice";
 
 function Navbar() {
   const navigate = useNavigate();
   const [cookie, setCookie] = useState("");
   const value = useSelector((state) => state.user.user);
+  const cart = useSelector((state) => state.cart.cart);
+
   const dispatch = useDispatch();
   const location=useLocation()
+  
 
   const logOut = () => {
     console.log("click")
@@ -28,6 +31,8 @@ function Navbar() {
       localStorage.removeItem("selectedBrand")
     }
   })
+
+  console.log(cart?.length,"web")
 
   return (
     <div className="h-12 lg:h-20 w-screen">
@@ -50,7 +55,7 @@ function Navbar() {
           </div>
         </div>
       </div>
-      <div className="h-12 w-screen bg-[#2874F0] text-white font-bold shadow px-4 md:p-3 flex items-center justify-between lg:px-40">
+      <div className="h-12 w-screen bg-[--bg-color] text-white font-bold shadow px-4 md:p-3 flex items-center justify-between lg:px-40">
         <div>Logo</div>
         <div className="pt-6">
           <Form>
@@ -62,12 +67,16 @@ function Navbar() {
             </Form.Item>
           </Form>
         </div>
-        <div className="hidden md:block cursor-pointer" onClick={()=>{navigate("/Cart/12")}}>
+        <div className="hidden md:block cursor-pointer relative" onClick={()=>{navigate("/Cart/12")}}>
           <ShoppingCartIcon />
           Cart
+          <div className={`${get(cart,"length")===undefined?"hidden":""}`}>
+          <div className={`rounded-full h-4 w-4 absolute top-[-5px] left-[8px] bg-white text-[--bg-color] flex items-center justify-center text-[10px]`}>{get(cart,"length")}</div>
+          </div>
+        
         </div>
         {value!==undefined ? (
-          <Avatar onClick={logOut} className="cursor-pointer ">R</Avatar>
+          <Avatar onClick={logOut} className="cursor-pointer shadow-inner shadow-white">R</Avatar>
         ) : (
           <Button
             onClick={() => {
