@@ -1,18 +1,17 @@
+/* eslint-disable no-unused-vars */
 import { Button, Form, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import { auth, googleProvider } from "../firebase/firebaseConfig";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {  signInWithPopup } from "firebase/auth";
 import google from "../../src/assets/google.png";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeUservalues } from "../Redux/userSlice";
 import { isEmpty } from "lodash";
-import Cookies from "js-cookie";
 
 function Login() {
   const navigate = useNavigate();
-  const location = useLocation();
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const [data, setData] = useState("");
@@ -84,7 +83,6 @@ function Login() {
     }
   }, [data, navigate]);
 
-  console.log(data,"ah")
 
   return (
     <div
@@ -148,6 +146,7 @@ function Login() {
             >
               SignIn
             </Button>
+            <p className="text-white font-bold cursor-pointer">forgot password?</p>
           </div>
           <div className="flex items-center justify-center pt-10">
             <Button

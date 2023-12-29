@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Avatar, Drawer, Form, Input, Button } from "antd";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import React, { useEffect } from "react";
+import { Avatar, Form, Input, Button } from "antd";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Cookies from "js-cookie";
 import { useNavigate,useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import isEmpty, { get } from "lodash";
+import  { get } from "lodash";
 import { changeUservalues } from "../Redux/userSlice";
 
 function Navbar() {
   const navigate = useNavigate();
-  const [cookie, setCookie] = useState("");
   const value = useSelector((state) => state.user.user);
   const cart = useSelector((state) => state.cart.cart);
-
   const dispatch = useDispatch();
   const location=useLocation()
   

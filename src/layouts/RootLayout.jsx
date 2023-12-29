@@ -5,12 +5,16 @@ import Navbar from "./navbar";
 
 function RootLayout() {
   const location = useLocation(true);
-  console.log(location);
+
   return (
     <div>
       <div
         className={`${
-          location.pathname.split("/").includes("register")||location.pathname.split("/").includes("login") ? "hidden" : "block"
+          location.pathname.split("/").includes("register") ||
+          location.pathname.split("/").includes("login") ||
+          location.pathname.split("/").includes("forgotpassword")
+            ? "hidden"
+            : "block"
         }`}
       >
         <Navbar />
@@ -19,7 +23,11 @@ function RootLayout() {
       <Outlet />
       <div
         className={`${
-          location.pathname.split("/").includes("register")||location.pathname.split("/").includes("login") ? "hidden" : "block"
+          location.pathname.split("/").includes("register") ||
+          location.pathname.split("/").includes("login") ||
+          location.pathname.split("/").includes("forgotpassword")
+            ? "hidden"
+            : "block"
         }`}
       >
         <Footer />

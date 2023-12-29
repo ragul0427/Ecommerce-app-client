@@ -1,19 +1,22 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Images } from "../helper/ExploreProducts";
-import { useLocation } from "react-router-dom";
+import { useLocation,useParams } from "react-router-dom";
 import Zoom from "react-img-zoom";
 
 function ExploreProduct() {
   const [img, setImg] = useState(Images[0].img[0]);
   const [products, setProducts] = useState("");
   const location = useLocation();
+  const {id}=useParams()
+  console.log(id,"ididi")
 
   console.log(location.pathname.split("/")[2]);
 
   useEffect(() => {
     setProducts(
       Images.filter((res, i) => {
-        return res.subCatId == location.pathname.split("/")[2];
+        return res.subCatId === Number(id);
       })
     );
   }, []);
@@ -25,7 +28,7 @@ function ExploreProduct() {
       <div className="flex flex-col md:flex-row md:w-[85vw] justify-between m-auto md:pt-5">
         <div className="md:w-[40vw] bg-white border flex flex-col md:flex-row-reverse border-slate-300">
           <div className="w-full h-[50vh] md:max-w-[100%] md:h-auto flex items-center justify-center">
-            <img src={img} className="h-[80%] md:w-auto md:h-[90%]" />
+            <img alt="product" src={img} className="h-[80%] md:w-auto md:h-[90%]" />
             {/* <Zoom img={img} zoomScale={3} width={600} height={600} /> */}
           </div>
           <div className="flex md:flex-col">
@@ -42,7 +45,7 @@ function ExploreProduct() {
                     setImg(res);
                   }}
                 >
-                  <img src={res} className="h-[80%] md:h-[100%]"/>
+                  <img alt="product" src={res} className="h-[80%] md:h-[100%]"/>
                 </div>
               );
             })}

@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CategoriesList } from "../helper/categories";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
-import { FreeMode, Grid, Navigation } from "swiper/modules";
-import { useSelector } from "react-redux";
-import { isEmpty } from "lodash";
+import {  Grid, Navigation } from "swiper/modules";
 import {useNavigate} from "react-router-dom"
 
 function Categories() {
-  const value=useSelector((state)=>state.user.user)
   const navigate=useNavigate()
  
   return (  
@@ -27,15 +24,15 @@ function Categories() {
 
          <div className="w-[70vw] lg:w-[80vw] lg:ml-[-60px]">
          <Swiper
-             freeMode={true}
+             
               grid={{
                 rows: 1,
               }}
               navigation={{
                 clickable: true,
               }}
-              modules={[Grid, Navigation,FreeMode]}
-              className="!w-[70vw] lg:w-[80vw] mt-3"
+              modules={[Grid, Navigation]}
+             
           
               breakpoints={{
                 640: {
@@ -60,9 +57,9 @@ function Categories() {
               {res.catNames.map((data, i) => {
                
                 return (
-                  <SwiperSlide className="!w-[48%]  sm:!w-[32%] lg:!w-[25%] xl:!w-[17%] !flex !flex-col items-center cursor-pointer" onClick={()=>{navigate(`/subcategories/${data.id}`)}}>
+                  <SwiperSlide className="xl:!w-[17vw] !flex !flex-col items-center justify-center"  onClick={()=>{navigate(`/subcategories/${data.id}`)}}>
                     <div className="h-[20vh] lg:h-[25vh] flex items-center justify-center  px-2">
-                    <img src={`${data.image}`} className="!w-[fit] h-[70%] lg:h-[90%] lg:!w-fit" />
+                    <img alt="CategoryImage" src={`${data.image}`} className="!w-[fit] h-[70%] lg:h-[90%] lg:!w-fit" />
                     </div>
                     <span className="text-[10px] sm:text-[12px] md:text-[15px] lg:text-lg  font-medium">{data.name}</span>
                     <span className="text-[10px] sm:text-[12px] md:text-[15px] lg:text-lg  font-medium">From {data.price}</span>

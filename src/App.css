@@ -1,3 +1,8 @@
 .swiper-button-prev, .swiper-button-next{
   color: white !important;
 }
+
+.ant-modal-mask,
+.ant-drawer-mask {
+  backdrop-filter: blur(5px) !important;
+}

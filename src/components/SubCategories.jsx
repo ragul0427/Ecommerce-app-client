@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Card, Checkbox, List, Image, Drawer } from "antd";
 import { subCategories } from "../helper/subCategories";
 import { useLocation, useNavigate } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { useDispatch } from "react-redux";
 import { addCartProducts } from "../Redux/cartSlice";
@@ -92,7 +91,7 @@ function SubCategories() {
   useEffect(() => {
     setSubCategory(
       subCategory.filter((res, i) => {
-        return res.categoryId == location.pathname.split("/")[2];
+        return res.categoryId === location.pathname.split("/")[2];
       })
     );
 
@@ -102,13 +101,13 @@ function SubCategories() {
       return (
         price >= min &&
         price <= max &&
-        product.categoryId == location.pathname.split("/")[2]
+        product.categoryId === location.pathname.split("/")[2]
       );
     });
 
     const selectedBrand = selectedValues.toString().toLowerCase();
     const filteredBrands = subCategories.filter((res, i) => {
-      return res?.brand?.toLowerCase() == selectedBrand;
+      return res?.brand?.toLowerCase() === selectedBrand;
     });
 
     if (selectedPriceRange !== "" && selectedValues !== "") {
@@ -120,8 +119,8 @@ function SubCategories() {
         return (
           price >= min &&
           price <= max &&
-          product.categoryId == location.pathname.split("/")[2] &&
-          product.brand.toLowerCase() == selectedBrand.toLowerCase()
+          product.categoryId === location.pathname.split("/")[2] &&
+          product.brand.toLowerCase() === selectedBrand.toLowerCase()
         );
       });
 
@@ -130,10 +129,10 @@ function SubCategories() {
       if (selectedPriceRange === "" && selectedValues === "") {
         setSubCategory(
           subCategories.filter((res, i) => {
-            return res.categoryId == location.pathname.split("/")[2];
+            return res.categoryId === location.pathname.split("/")[2];
           })
         );
-      } else if (selectedPriceRange == "") {
+      } else if (selectedPriceRange === "") {
         setSubCategory(filteredBrands);
       } else {
         setSubCategory(filteredProducts);

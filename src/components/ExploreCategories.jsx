@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { CategoriesList } from "../helper/categories";
 import { useLocation,useNavigate } from "react-router-dom";
@@ -10,7 +11,7 @@ function ExploreCategories() {
   useEffect(() => {
     setCategories(
       CategoriesList.filter((res, i) => {
-        return res.id == location.pathname.split("/")[2];
+        return res.id === location.pathname.split("/")[2];
       })[0]
     );
   }, [CategoriesList]);
@@ -31,7 +32,7 @@ function ExploreCategories() {
             >
               <div className="bg-white cursor-pointer p-2 py-1 shadow-lg w-[48vw] h-[28vh] md:w-[22vw] lg:w-[16vw] lg:h-[27vh] xl:w-[13vw] xl:h-[27vh] rounded-lg flex-col items-center justify-center">
                 <div className="flex items-center pt-5 justify-center">
-                  <img src={res.image} className="h-[18vh] w-fit bg-cover" />
+                  <img alt="productimage" src={res.image} className="h-[18vh] w-fit bg-cover" />
                 </div>
                 <div className="text-center" onClick={()=>{navigate(`/subcategories/${res.id}`)}}>{res.name}</div>
               </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Form, Input, InputNumber, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import { auth, googleProvider } from "../firebase/firebaseConfig";
@@ -5,14 +6,12 @@ import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import google from "../../src/assets/google.png";
 import { useNavigate } from "react-router-dom";
 import isEmpty from "lodash";
-import axios from "axios";
-import cookie from "js-cookie";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeUservalues } from "../Redux/userSlice";
+import axios from "axios";
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [data, setData] = useState("");
@@ -150,9 +149,6 @@ function Register() {
             >
               <Input
                 type="email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
                 placeholder="Email"
                 size="large"
               />
@@ -201,9 +197,6 @@ function Register() {
                 type="password"
                 placeholder="Password"
                 size="large"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
               />
             </Form.Item>
             <Form.Item

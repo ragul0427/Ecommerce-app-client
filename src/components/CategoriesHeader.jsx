@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swipper from "./Swipper";
 import { Image } from "antd";
 import { CategoriesList } from "../helper/categories";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 
 function CategoriesHeader() {
