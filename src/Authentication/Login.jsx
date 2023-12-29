@@ -146,7 +146,9 @@ function Login() {
             >
               SignIn
             </Button>
-            <p className="text-white font-bold cursor-pointer">forgot password?</p>
+            <p  onClick={() => {
+                  navigate("/forgotpassword");
+                }} className="text-white font-bold cursor-pointer">forgot password?</p>
           </div>
           <div className="flex items-center justify-center pt-10">
             <Button
