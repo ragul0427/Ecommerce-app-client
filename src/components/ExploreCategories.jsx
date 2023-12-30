@@ -16,11 +16,10 @@ function ExploreCategories() {
     );
   }, [CategoriesList]);
 
-  console.log(categories);
 
   return (
     <div>
-        <h1 className="text-center bg-white py-2 text-md">{categories.catName}</h1>
+        <h1 className="text-center bg-white py-2 text-md">{categories?.catName}</h1>
       <div className="grid grid-cols-2 md:flex  md:flex-wrap items-center md:pl-32 justify-start md:gap-20 xxl:w-[90vw]">
         
         {categories?.catNames?.map((res, i) => {

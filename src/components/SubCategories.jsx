@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Card, Checkbox, List, Image, Drawer } from "antd";
 import { subCategories } from "../helper/subCategories";
@@ -21,6 +22,10 @@ function SubCategories() {
   const [selectedPriceRange, setSelectedPriceRange] = useState(() => {
     return localStorage.getItem("selectedPriceRange") || "";
   });
+
+  useEffect(()=>{
+
+  },[subCategory])
 
   const options = [
     {
@@ -89,6 +94,11 @@ function SubCategories() {
   ];
 
   useEffect(() => {
+
+    if(location.pathname.split("/")[2]){
+      
+    }
+
     setSubCategory(
       subCategory.filter((res, i) => {
         return res.categoryId === location.pathname.split("/")[2];
@@ -159,7 +169,7 @@ function SubCategories() {
     setOpen(false);
   };
 
-  console.log(localStorage.getItem("selectedPriceRange"));
+ 
 
   const allProducts = () => {
     localStorage.removeItem("selectedPriceRange");
@@ -167,6 +177,7 @@ function SubCategories() {
     setSelectedPriceRange("");
     setSelectedValues("");
     setOpen(false);
+    setSubCategory(subCategories)
   };
 
   const addCart = (data) => {
@@ -175,6 +186,8 @@ function SubCategories() {
     setCart(updatedCart);
     dispatch(addCartProducts(updatedCart));
   };
+
+  console.log(subCategory)
 
   return (
     <div className="flex">
@@ -185,7 +198,7 @@ function SubCategories() {
             <h1>price to price</h1>
             <Checkbox
               checked={
-                (selectedPriceRange == "" && selectedValues == "") ||
+                (selectedPriceRange === "" && selectedValues === "") ||
                 (localStorage.getItem("selectedPriceRange") == null &&
                   localStorage.getItem("selectedBrand") == null)
                   ? true
@@ -322,9 +335,7 @@ function SubCategories() {
                   : ""
               }
               className="pt-1"
-              onChange={(event) => {
-                allProducts(event);
-              }}
+              onChange={allProducts}
             >
               All
             </Checkbox>

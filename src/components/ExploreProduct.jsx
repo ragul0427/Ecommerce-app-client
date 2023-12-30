@@ -9,9 +9,7 @@ function ExploreProduct() {
   const [products, setProducts] = useState("");
   const location = useLocation();
   const {id}=useParams()
-  console.log(id,"ididi")
-
-  console.log(location.pathname.split("/")[2]);
+  
 
   useEffect(() => {
     setProducts(
@@ -19,7 +17,7 @@ function ExploreProduct() {
         return res.subCatId === Number(id);
       })
     );
-  }, []);
+  }, [id]);
 
   console.log(products, "Wesgy");
 

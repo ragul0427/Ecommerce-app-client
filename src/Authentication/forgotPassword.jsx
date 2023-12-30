@@ -1,58 +1,88 @@
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Input, Modal, notification } from "antd";
+import axios from "axios";
+import { get } from "lodash";
 import React, { useState } from "react";
 import OtpInput from "react-otp-input";
+import {useNavigate} from "react-router-dom"
 
 function ForgotPassword() {
   const [otp, setOtp] = useState("");
   const [open, setOpen] = useState("");
   const [otpError, setOtpError] = useState("");
+  const [validOtp,setValidOtp] = useState("");
+  const navigate=useNavigate()
 
-  const handleOtpSubmit = () => {
-    // Basic validation: Check if the entered OTP is a 6-digit number
-    const isValidOtp = /^\d{6}$/.test(otp);
+  const validateEmail = (_, value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (isValidOtp) {
-      // TODO: Add logic to further validate the OTP if needed
-      console.log("Entered OTP:", otp);
-      setOpen(false); // Close the modal after successful OTP submission
-      setOtpError(""); // Clear any previous OTP validation error
-    } else {
-      setOtpError("Please enter a valid 6-digit OTP.");
+    if (value && !emailRegex.test(value)) {
+      return Promise.reject('Invalid email address');
+    }
+
+    return Promise.resolve();
+  };
+
+
+  const handleFinish = async (value) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/forgot_password`,
+        value
+      );
+      console.log(get(response, "data.data"), "res");
+      setValidOtp(get(response, "data.data"))
+      if (get(response, "data.data")) {
+        setOpen(!open);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
 
+  const handleOtpSubmit = () => {
+    if (otp===validOtp) {
+      notification.success({message: "Otp verified successfully"})
+      setOpen(false);
+      setOtpError("");
+      navigate("/password_reset")
+      
+    } else {
+      setOtpError("Please enter a valid 6-digit OTP.");
+     
+    }
+  };
+  
+
   return (
-    <div className="flex flex-col items-center pt-40 bg-black h-screen gap-20">
-        <div className="flex flex-col gap-5 pt-8">
-          <h1 className="text-4xl text-white">Enter Your Register Email</h1>
-          <Form
-            className="w-[300px] md:w-[400px] rounded-md py-10 bg-white shadow-md flex flex-col items-center justify-center"
-            layout="vertical"
+    <div className="flex flex-col items-center pt-28 bg-[--bg-color] bg-opacity-70 backdrop-blur-md  h-screen gap-20">
+      <div className="flex flex-col gap-5 pt-8">
+        <h1 className="md:text-4xl text-white text-center">Enter Your Register Email</h1>
+        <Form
+          className="w-[300px] md:w-[400px] rounded-md py-10 bg-white bg-opacity-70 shadow-md shadow-md flex flex-col items-center justify-center"
+          layout="vertical"
+          onFinish={handleFinish}
+        >
+          <Form.Item
+            name="email"
+            rules={[
+              { required: true, },
+              { validator: validateEmail },
+            ]}
+            className="w-[80%]"
+            label={"Enter Your Email"}
           >
-            <Form.Item
-              name="email"
-              rules={[{ required: true }]}
-              className="w-[80%]"
-              label={"Enter Your Email"}
+            <Input type="email" placeholder="Enter your email..." size="large" />
+          </Form.Item>
+          <Form.Item className="w-[80%]">
+            <Button
+              htmlType="submit"
+              className="w-[100%] bg-[--bg-color] text-white h-[40px] hover:!text-white hover:scale-105 duration-700"
             >
-              <Input
-                type="text"
-                placeholder="Enter your email..."
-                size="large"
-              />
-            </Form.Item>
-            <Form.Item className="w-[80%]">
-              <Button
-                onClick={() => {
-                  setOpen(!open);
-                }}
-                className="w-[100%] bg-[--bg-color] text-white h-[40px] hover:!text-white hover:scale-105 duration-700"
-              >
-                Request Otp
-              </Button>
-            </Form.Item>
-          </Form>
-        </div>
+              Request Otp
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
       <Modal
         open={open}
         width={400}

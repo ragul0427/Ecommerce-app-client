@@ -141,10 +141,8 @@ function Register() {
               label={<p className="text-white">Email</p>}
               name="email"
               rules={[
-                {
-                  required: true,
-                  message: "Please input your Email!",
-                },
+                { required: true, message: 'Please input your email' },
+                { type: 'email', message: 'Please enter a valid email address' },
               ]}
             >
               <Input
@@ -160,6 +158,10 @@ function Register() {
                 {
                   required: true,
                   message: "Please input your Phone!",
+                },
+                {
+                  pattern: /^\d{10}$/,
+                  message: "Phone number must be exactly 10 digits.",
                 },
               ]}
             >
@@ -179,18 +181,7 @@ function Register() {
                   required: true,
                   message: "Please input your Password!",
                 },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    console.log(value, "kj");
-                    const confirmPassword = getFieldValue("confirmPassword");
-                    if (!value || confirmPassword === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      "Password does not match with Confirm Password"
-                    );
-                  },
-                }),
+                { min: 6, message: 'Password must be at least 6 characters' },
               ]}
             >
               <Input.Password
@@ -211,14 +202,10 @@ function Register() {
 
                 ({ getFieldValue }) => ({
                   validator(_, value) {
-                    console.log(value, "jhvgv");
-                    const password = getFieldValue("password");
-                    if (!value || password === value) {
+                    if (!value || getFieldValue('password') === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(
-                      "Confirm Password does not match with  Password"
-                    );
+                    return Promise.reject('Confirm Password do not match with password');
                   },
                 }),
               ]}

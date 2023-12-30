@@ -12,7 +12,8 @@ function RootLayout() {
         className={`${
           location.pathname.split("/").includes("register") ||
           location.pathname.split("/").includes("login") ||
-          location.pathname.split("/").includes("forgotpassword")
+          location.pathname.split("/").includes("forgotpassword")||
+          location.pathname.split("/").includes("password_reset")
             ? "hidden"
             : "block"
         }`}
@@ -25,7 +26,8 @@ function RootLayout() {
         className={`${
           location.pathname.split("/").includes("register") ||
           location.pathname.split("/").includes("login") ||
-          location.pathname.split("/").includes("forgotpassword")
+          location.pathname.split("/").includes("forgotpassword")||
+          location.pathname.split("/").includes("password_reset")
             ? "hidden"
             : "block"
         }`}

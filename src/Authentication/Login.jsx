@@ -102,10 +102,8 @@ function Login() {
           <Form.Item
             name="email"
             rules={[
-              {
-                required: true,
-                message: "Please input your FirstName!",
-              },
+              { required: true, message: 'Please input your email' },
+              { type: 'email', message: 'Please enter a valid email address' },
             ]}
             label={<p className="text-white">Email</p>}
           >

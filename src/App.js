@@ -10,6 +10,7 @@ import { Product } from "./screens";
 import Register from "./Authentication/Register";
 import Login from "./Authentication/Login";
 import ForgotPassword from "./Authentication/forgotPassword";
+import PasswordReset from "./Authentication/passwordReset";
 
 
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="ExploreCategories/:id" element={<ExploreCategories />} />
       <Route path="ExploreProduct/:id" element={<ExploreProduct />} />
       <Route path="Cart/:id" element={<Cart />} />
+      <Route path="password_reset" element={<PasswordReset />} />
     </Route>
   )
 );
