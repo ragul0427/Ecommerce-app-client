@@ -55,6 +55,7 @@ function Register() {
         const { token } = response.data;
         localStorage.setItem("token", token);
         notification.success({ message: "Register Successfully" });
+        navigate("/login");
       }
     } catch (err) {
       if (err.code.split("/")[1] === "email-already-in-use") {
