@@ -11,6 +11,7 @@ import Register from "./Authentication/Register";
 import Login from "./Authentication/Login";
 import ForgotPassword from "./Authentication/forgotPassword";
 import PasswordReset from "./Authentication/passwordReset";
+import PhoneAuth from "./Authentication/phoneAuth";
 
 
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route path="ExploreProduct/:id" element={<ExploreProduct />} />
       <Route path="Cart/:id" element={<Cart />} />
       <Route path="password_reset" element={<PasswordReset />} />
+      <Route path="phone_auth" element={<PhoneAuth />} />
     </Route>
   )
 );

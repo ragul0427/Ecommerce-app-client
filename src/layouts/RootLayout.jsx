@@ -13,7 +13,8 @@ function RootLayout() {
           location.pathname.split("/").includes("register") ||
           location.pathname.split("/").includes("login") ||
           location.pathname.split("/").includes("forgotpassword")||
-          location.pathname.split("/").includes("password_reset")
+          location.pathname.split("/").includes("password_reset")||
+          location.pathname.split("/").includes("phone_auth")
             ? "hidden"
             : "block"
         }`}
@@ -27,7 +28,8 @@ function RootLayout() {
           location.pathname.split("/").includes("register") ||
           location.pathname.split("/").includes("login") ||
           location.pathname.split("/").includes("forgotpassword")||
-          location.pathname.split("/").includes("password_reset")
+          location.pathname.split("/").includes("password_reset")||
+          location.pathname.split("/").includes("phone_auth")
             ? "hidden"
             : "block"
         }`}

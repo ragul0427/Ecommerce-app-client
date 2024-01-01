@@ -6,6 +6,7 @@ import { useNavigate,useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import  { get } from "lodash";
 import { changeUservalues } from "../Redux/userSlice";
+import axios from "axios";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Navbar() {
   const dispatch = useDispatch();
   const location=useLocation()
   
+  console.log(value,'valueee')
 
   const logOut = () => {
     console.log("click")
@@ -29,7 +31,28 @@ function Navbar() {
     }
   })
 
-  console.log(cart?.length,"web")
+  const fetchData = async () => {
+    const token = localStorage.getItem("token");
+    
+
+   try{
+    const result=await axios
+    .get(`${process.env.REACT_APP_URL}/validateToken`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    dispatch(changeUservalues(result.data));
+   
+   }catch(err){
+    console.log(err)
+   }
+     
+  };
+
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   return (
     <div className="h-12 lg:h-20 w-screen">
