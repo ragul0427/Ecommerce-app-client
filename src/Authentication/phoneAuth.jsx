@@ -16,7 +16,7 @@ import {useDispatch} from "react-redux"
 const PhoneAuth = () => {
   const [form] = Form.useForm();
   const [otp, setOtp] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [expandForm, setExpandForm] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ const PhoneAuth = () => {
                 className="xsm:!w-[30vw] w-fit sm:!h-[35vh] md:!h-[40vh] lg:!h-[38vh] lg:!w-fit"
               />
             </div>
-            <div className="lg:w-[35vw] bg-white sm:w-[70vw]  flex rounded-md !pt-[5vh] flex-col md:items-center lg:justify-between">
+            <div className="lg:w-[35vw] w-[100vw  ] bg-white sm:w-[70vw]  flex rounded-md !pt-[5vh] flex-col items-center justify-between">
               <Form
                 style={{ maxWidth: 500 }}
                 form={form}
