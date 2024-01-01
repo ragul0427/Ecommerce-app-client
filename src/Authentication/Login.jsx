@@ -96,7 +96,7 @@ function Login() {
           'linear-gradient(to right, rgba(0,0,0,0.7), rgba(1,0,0,0.8)), url("https://i.pinimg.com/originals/82/0c/98/820c981247cc8be38e2bc3c433fc77f4.jpg")',
       }}
     >
-      <div className="xl:h-[57vh] w-[80vw] xsm:h-[67vh] sm:w-[60vw] md:w-[40vw] lg:w-[25vw] bg-white/10 shadow-md p-5">
+      <div className="xl:h-[57vh] w-[80vw] xsm:h-[60vh] sm:w-[60vw] md:w-[40vw] lg:w-[25vw] bg-white/10 shadow-md p-5">
         <Form
           className="absolute w-[70%] sm:w-[50%] md:w-[30%] lg:w-[20%]"
           layout="vertical"
@@ -130,7 +130,7 @@ function Login() {
             />
           </Form.Item>
 
-          <div className=" !pt-3 !mt-0 !flex flex-col  gap-1 justify-between px-3 ">
+          <div className=" md:!pt-3 !mt-0 !flex flex-col  gap-1 justify-between px-3 ">
             <p className="text-[12px] lg:text-md text-center text-white font-semibold ">
               New user?
               <span

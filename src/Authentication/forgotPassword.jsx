@@ -92,7 +92,7 @@ function ForgotPassword() {
           setOtpError("");
         }}
       >
-        <div className="py-10">
+        <div className="py-4">
           <div className="flex items-center justify-center">
             <label
               htmlFor="otp"
