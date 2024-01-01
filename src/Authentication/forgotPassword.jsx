@@ -29,7 +29,7 @@ function ForgotPassword() {
         `${process.env.REACT_APP_URL}/forgot_password`,
         value
       );
-      console.log(get(response, "data.data"), "res");
+     
       setValidOtp(get(response, "data.data"))
       if (get(response, "data.data")) {
         setOpen(!open);

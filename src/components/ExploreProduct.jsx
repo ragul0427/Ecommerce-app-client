@@ -70,10 +70,10 @@ function ExploreProduct() {
             <p className="pt-5">Choose Color</p>
             <div className="flex gap-1 pt-1">
               <div className="!w-[22vw] md:!w-[6vw] border-2 border-slate-300 hover:scale-105 duration-1000 cursor-pointer">
-                <img src="https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg" />
+                <img alt="color" src="https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg" />
               </div>
-              <div className="!w-[22vw] md:!w-[6vw] border-2 border-slate-300 hover:scale-105 duration-1000 cursor-pointer">
-                <img src="https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg" />
+              <div  className="!w-[22vw] md:!w-[6vw] border-2 border-slate-300 hover:scale-105 duration-1000 cursor-pointer">
+                <img alt="color" src="https://tiimg.tistatic.com/fp/1/007/951/6-6-inch-screen-size-full-hd-128-gb-internal-storage-vivo-y33t-mobile-phone-447.jpg" />
               </div>
             </div>
           </div>

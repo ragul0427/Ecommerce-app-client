@@ -2,13 +2,14 @@
 import { Button, Form, Input, InputNumber, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import { auth, googleProvider } from "../firebase/firebaseConfig";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, deleteUser, signInWithPopup } from "firebase/auth";
 import google from "../../src/assets/google.png";
 import { useNavigate } from "react-router-dom";
-import isEmpty from "lodash";
+import isEmpty, { get } from "lodash";
 import { useDispatch } from "react-redux";
 import { changeUservalues } from "../Redux/userSlice";
 import axios from "axios";
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 
 function Register() {
 
@@ -24,7 +25,7 @@ function Register() {
       if (isEmpty(result)) {  
         console.log(result)
         const response=await axios.post(
-          `${process.env.REACT_APP_URL}/createuser`,
+          `${process.env.REACT_APP_URL}/getuser`,
           result.user,
           { withCredentials: true }
         );
@@ -41,7 +42,7 @@ function Register() {
 
   const handleFinish = async (values) => {
     try {
-      const { email, password } = values; // Get email and password from the form values
+      const { email, password } = values;
       const result = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -58,8 +59,21 @@ function Register() {
         navigate("/login");
       }
     } catch (err) {
+      console.log(err)
       if (err.code.split("/")[1] === "email-already-in-use") {
-        notification.error({ message: "User Already Exists" });
+        notification.error({ message: "This email already exists" });
+      }
+      const user = auth.currentUser;
+      if (user) {
+        try {
+          await deleteUser(user);
+          console.log("User deleted from Firebase");
+        } catch (deleteErr) {
+          console.error("Error deleting user from Firebase:", deleteErr);
+        }
+      }
+      if(get(err,"response.data.message","")){
+        notification.error({ message: get(err,"response.data.message","") });
       }
     }
   };
@@ -244,9 +258,18 @@ function Register() {
             className="text-black font-semibold lg:h-[5vh] bg-white flex items-center justify-center gap-2 lg:w-[15vw]"
           >
             Continue with google
-            <img src={google} className="w-4 h-4 mt-1" />
+            <img alt="google" src={google} className="w-4 h-4 mt-1" />
           </Button>
         </div>
+        <div className="flex items-center justify-center pt-2">
+            <Button
+              onClick={()=>{navigate("/phone_auth")}}
+              className="text-black font-semibold lg:h-[5vh] bg-white flex items-center justify-center gap-2 lg:w-[15vw]"
+            >
+              Login with mobile
+              <PhoneIphoneIcon/>
+            </Button>
+          </div>
         <p className="text-[14px] lg:text-md text-white pt-5 text-center">
           By proceeding, you acknowledge and accept RH shop's{" "}
           <span className="text-blue-500 cursor-pointer">Terms of Use</span> and{" "}

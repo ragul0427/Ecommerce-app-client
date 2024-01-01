@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { addCartProducts } from "../Redux/cartSlice";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-function SubCategories() {
-  const [subCategory, setSubCategory] = useState(subCategories);
+function SubCategoryComponent() {
+  const [subCategory, setSubCategory] = useState();
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -100,13 +100,13 @@ function SubCategories() {
     }
 
     setSubCategory(
-      subCategory.filter((res, i) => {
+      subCategories?.filter((res, i) => {
         return res.categoryId === location.pathname.split("/")[2];
       })
     );
 
     const [min, max] = selectedPriceRange.split("-").map(Number);
-    const filteredProducts = subCategories.filter((product) => {
+    const filteredProducts = subCategories?.filter((product) => {
       const price = parseInt(product.price);
       return (
         price >= min &&
@@ -116,14 +116,12 @@ function SubCategories() {
     });
 
     const selectedBrand = selectedValues.toString().toLowerCase();
-    const filteredBrands = subCategories.filter((res, i) => {
+    const filteredBrands = subCategories?.filter((res, i) => {
       return res?.brand?.toLowerCase() === selectedBrand;
     });
 
     if (selectedPriceRange !== "" && selectedValues !== "") {
-      console.log("true");
-      console.log(subCategory, "wdbhkbhb");
-      const filteredProducts = subCategories.filter((product) => {
+      const filteredProducts = subCategories?.filter((product) => {
         const price = parseInt(product.price);
         console.log(selectedBrand, product.brand, "price");
         return (
@@ -138,7 +136,7 @@ function SubCategories() {
     } else {
       if (selectedPriceRange === "" && selectedValues === "") {
         setSubCategory(
-          subCategories.filter((res, i) => {
+          subCategories?.filter((res, i) => {
             return res.categoryId === location.pathname.split("/")[2];
           })
         );
@@ -169,7 +167,7 @@ function SubCategories() {
     setOpen(false);
   };
 
- 
+ console.log(subCategory,"wnjkensj",subCategories)
 
   const allProducts = () => {
     localStorage.removeItem("selectedPriceRange");
@@ -253,7 +251,7 @@ function SubCategories() {
       <div className="pl-2 lg:pl-[25vw]">
         <List
           className="xsm:!w-[90vw] lg:!w-[75vw]"
-          dataSource={subCategory}
+          dataSource={subCategory?.length===0?subCategories:subCategory}
           grid={{
             gutter: 16,
             xs: 2,
@@ -326,7 +324,7 @@ function SubCategories() {
             <h1>price to price</h1>
             <Checkbox
               checked={
-                (selectedPriceRange == "" && selectedValues == "") ||
+                (selectedPriceRange === "" && selectedValues === "") ||
                 (localStorage.getItem("selectedPriceRange") == null &&
                   localStorage.getItem("selectedBrand") == null)
                   ? true
@@ -371,4 +369,4 @@ function SubCategories() {
   );
 }
 
-export default SubCategories;
+export default SubCategoryComponent;

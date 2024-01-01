@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, notification } from "antd";
 import React, { useEffect, useState } from "react";
 import { auth, googleProvider } from "../firebase/firebaseConfig";
 import {  signInWithPopup } from "firebase/auth";
@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeUservalues } from "../Redux/userSlice";
 import { isEmpty } from "lodash";
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 
 function Login() {
   const navigate = useNavigate();
@@ -52,7 +53,10 @@ function Login() {
 
       fetchData();
     } catch (err) {
-      console.log(err);
+      
+      if(err?.response?.status === 404) {
+        notification.error({message:err.response.data.message})
+      }
     }
   };
 
@@ -92,7 +96,7 @@ function Login() {
           'linear-gradient(to right, rgba(0,0,0,0.7), rgba(1,0,0,0.8)), url("https://i.pinimg.com/originals/82/0c/98/820c981247cc8be38e2bc3c433fc77f4.jpg")',
       }}
     >
-      <div className="h-[55vh] w-[80vw] sm:w-[60vw] md:w-[40vw] lg:w-[25vw] bg-white/10 shadow-md p-5">
+      <div className="xl:h-[57vh] w-[80vw] xsm:h-[67vh] sm:w-[60vw] md:w-[40vw] lg:w-[25vw] bg-white/10 shadow-md p-5">
         <Form
           className="absolute w-[70%] sm:w-[50%] md:w-[30%] lg:w-[20%]"
           layout="vertical"
@@ -148,13 +152,22 @@ function Login() {
                   navigate("/forgotpassword");
                 }} className="text-white font-bold cursor-pointer">forgot password?</p>
           </div>
-          <div className="flex items-center justify-center pt-10">
+          <div className="flex items-center justify-center pt-5">
             <Button
               onClick={signInWithGoogle}
               className="text-black font-semibold lg:h-[5vh] bg-white flex items-center justify-center gap-2 lg:w-[15vw]"
             >
               Continue with google
-              <img src={google} className="w-4 h-4 mt-1" />
+              <img alt="google" src={google} className="w-4 h-4 mt-1" />
+            </Button>
+          </div>
+          <div className="flex items-center justify-center pt-2">
+            <Button
+              onClick={()=>{navigate("/phone_auth")}}
+              className="text-black font-semibold lg:h-[5vh] bg-white flex items-center justify-center gap-2 lg:w-[15vw]"
+            >
+              Login with mobile
+              <PhoneIphoneIcon/>
             </Button>
           </div>
         </Form>
