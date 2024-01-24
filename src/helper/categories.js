@@ -15,7 +15,7 @@ export  const CategoriesList=[
                 name:"Televisions",
                 price:10000
             },
-            {
+            {   
                 id:3,
                 image:"https://images.jdmagicbox.com/quickquotes/images_main/asus-zenbook-14-ultra-thin-and-light-laptop-4-way-nanoedge-14-full-hd-intel-core-i7-8565u-8gb-lpddr3-ram-512gb-nvme-pcie-ssd-wi-fi-5-windows-10-silver-blue-ux431fa-es74-179008469-q9czu.jpg",
                 name:"Laptops",

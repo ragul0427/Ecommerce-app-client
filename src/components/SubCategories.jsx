@@ -185,14 +185,14 @@ function SubCategoryComponent() {
     dispatch(addCartProducts(updatedCart));
   };
 
-  console.log(subCategory)
+
 
   return (
     <div className="flex">
      
-      <div className="!w-[40vw] fixed hidden sm:block lg:!w-[20vw] gap-5 pt-5 pl-5 bg-white h-[90vh]">
-        <div className="fixed ">
-          <div className="flex !w-[18vw] justify-between">
+      <div className="pl-5 pt-3 bg-white h-[90vh]">
+        <div className="flex !w-[18vw] flex-col justify-center">
+          <div className="flex">
             <h1>price to price</h1>
             <Checkbox
               checked={
@@ -204,7 +204,7 @@ function SubCategoryComponent() {
                   ? false
                   : ""
               }
-              className="pt-1"
+              className="pt-1 pl-20"
               onChange={(event) => {
                 allProducts(event);
               }}
@@ -248,7 +248,7 @@ function SubCategoryComponent() {
       >
         <FilterAltIcon /> Choose Filters
       </div>
-      <div className="pl-2 lg:pl-[25vw]">
+      <div className="pl-2 lg:pl-[3vw]">
         <List
           className="xsm:!w-[90vw] lg:!w-[75vw]"
           dataSource={subCategory?.length===0?subCategories:subCategory}

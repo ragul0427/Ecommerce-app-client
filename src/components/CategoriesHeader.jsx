@@ -108,25 +108,10 @@ function CategoriesHeader() {
                     mouseOver(res);
                   }}
                 >
-                  <span>{res.name}</span>
-                  {/* <span>
-                    <KeyboardArrowDownIcon />
-                  </span> */}
+                  <span onClick={()=>{navigate(`/subcategories/${res.id}`)}}>{res.name}</span>
+                 
                 </p>
-                {/* <div
-                  className={`${
-                    data.id === res.id ? "flex" : "hidden"
-                  } bg-white absolute top-[15vh]  gap-20 px-5 left-12 h-[50vh]  flex w-[95vw]`}
-                  onMouseOut={()=>{setData("")}}
-                >
-                  {categories?.catNames?.map((res, i) => {
-                    return (
-                      <div key={i} className="flex border-r pr-2">
-                        {res.name}
-                      </div>
-                    );
-                  })}
-                </div> */}
+                
               </div>
             );
           })}

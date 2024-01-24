@@ -23,7 +23,7 @@ function Cart() {
   };
 
   return (
-    <div className="w-[80vw] m-auto mt-8">
+    <div className="w-[80vw] m-auto mt-8 h-screen overflow-y-scroll">
       <div className="text-white rounded-t-md bg-[--bg-color] py-2 px-2 flex justify-between">
         <p>Shopping Cart</p>
         <p>Total: 8828</p>
